@@ -52,6 +52,9 @@ cpmaddpackage(
 include(cmake/CompilerWarnings.cmake)
 include(cmake/Util.cmake)
 
+# Adds shared DSP core library.
+add_subdirectory(src)
+
 # Adds all the targets configured in the "plugin" folder.
 add_subdirectory(plugin)
 
@@ -60,3 +63,14 @@ enable_testing()
 
 # Adds all the targets configured in the "test" folder.
 add_subdirectory(test)
+
+set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_NAME "ParettoGate")
+set(CPACK_PACKAGE_VENDOR "Harring Audio Technology")
+set(CPACK_PACKAGE_VERSION "0.1.0")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}")
+include(CPack)
+
+if(TARGET PACKAGE AND NOT TARGET package)
+  add_custom_target(package DEPENDS PACKAGE)
+endif()

@@ -2,11 +2,18 @@
 
 #include <juce_audio_processors/juce_audio_processors.h>
 
+#include <cstdint>
+
+#include "gate/GateEngine.h"
+#include "common/DspContext.h"
+
 namespace audio_plugin {
 class AudioPluginAudioProcessor : public juce::AudioProcessor {
 public:
   AudioPluginAudioProcessor();
   ~AudioPluginAudioProcessor() override;
+
+  juce::AudioProcessorValueTreeState& getAPVTS() { return apvts_; }
 
   void prepareToPlay(double sampleRate, int samplesPerBlock) override;
   void releaseResources() override;
@@ -36,6 +43,15 @@ public:
   void setStateInformation(const void* data, int sizeInBytes) override;
 
 private:
+  static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
+  juce::AudioProcessorValueTreeState apvts_;
+
+  paretto::gate::GateEngine gateEngine_{};
+  paretto::gate::GateParameters gateParams_{};
+  std::uint32_t seed_{0};
+  paretto::dsp::ProcessContext ctx_{};
+
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioPluginAudioProcessor)
 };
 }  // namespace audio_plugin

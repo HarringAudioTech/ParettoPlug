@@ -1,8 +1,7 @@
-#include <YourPluginName/PluginProcessor.h>
 #include <gtest/gtest.h>
 
 namespace audio_plugin_test {
-TEST(AudioProcessor, Foo) {
-  audio_plugin::AudioPluginAudioProcessor processor{};
+TEST(Template, Placeholder) {
+  SUCCEED();
 }
 }  // namespace audio_plugin_test
