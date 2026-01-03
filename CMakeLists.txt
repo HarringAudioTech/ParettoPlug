@@ -34,19 +34,10 @@ cpmaddpackage(
 )
 
 # Adds googletest.
-cpmaddpackage(
-  NAME
-  GOOGLETEST
-  GITHUB_REPOSITORY
-  google/googletest
-  VERSION
-  1.16.0
-  SOURCE_DIR
-  ${LIB_DIR}/googletest
-  OPTIONS
-  "INSTALL_GTEST OFF"
-  "gtest_force_shared_crt ON"
-)
+set(GOOGLETEST_SOURCE_DIR ${LIB_DIR}/googletest)
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+add_subdirectory(${GOOGLETEST_SOURCE_DIR})
 
 # Add compiler warning utilities
 include(cmake/CompilerWarnings.cmake)
@@ -57,6 +48,9 @@ add_subdirectory(src)
 
 # Adds all the targets configured in the "plugin" folder.
 add_subdirectory(plugin)
+
+# Adds all the targets configured in the "motion_plugin" folder.
+add_subdirectory(motion_plugin)
 
 # This command allows running tests from the "build" folder (the one where CMake generates the project to).
 enable_testing()

@@ -16,6 +16,9 @@ set(PARETTO_CORE_SOURCE_FILES
     gate/GateEngine.cpp
     gate/GateEngine.h
     gate/GateParameters.h
+    motion/MotionEngine.cpp
+    motion/MotionEngine.h
+    motion/MotionParameters.h
 )
 
 add_library(ParettoCore STATIC ${PARETTO_CORE_SOURCE_FILES})

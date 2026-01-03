@@ -10,6 +10,7 @@ set(SOURCE_FILES
     source/CommonDspTest.cpp
     source/StepSequencerTest.cpp
     source/GateEngineTest.cpp
+    source/MotionEngineTest.cpp
 )
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
